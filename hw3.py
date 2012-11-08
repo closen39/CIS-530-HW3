@@ -21,7 +21,7 @@ def extract_top_words(csv_file):
 
     ret = list()
     for word in fdist.keys():
-        if fdist.count(word) > 5:
+        if fdist[word] > 5:
             ret.append(word)
     return ret
 
