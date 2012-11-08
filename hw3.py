@@ -15,12 +15,11 @@ def extract_top_words(csv_file):
     # get list of words
     fdist = FreqDist()
     for sent in corpus:
-        for word in word_tokenize(sent.lower()):
+        for word in word_tokenize(sent.lower()) if sent != None:
             fdist.inc(word)
 
     ret = list()
     ret.append(word for word in fdist.keys() if fdist.count(word) > 5)
-
-
+    return ret
 
 
