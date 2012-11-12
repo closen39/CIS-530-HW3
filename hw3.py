@@ -79,6 +79,9 @@ def get_mpqa_features(text, mpqa_dict):
                 neutral += 1
             elif y == "negative":
                 neg += 1
+            elif y == "both":
+                pos += 1
+                neg += 1
     return (pos, neg, neutral)
 
 def get_mpqa_features_wordtype(text, mpqa_dict):
@@ -98,6 +101,9 @@ def get_mpqa_features_wordtype(text, mpqa_dict):
                     strong_neutral += 1
                 elif y == "negative":
                     strong_neg += 1
+                elif y == "both":
+                    strong_neg += 1
+                    strong_pos += 1
             elif x == 'weaksubj':
                 if y == "positive":
                     weak_pos += 1
@@ -105,6 +111,9 @@ def get_mpqa_features_wordtype(text, mpqa_dict):
                     weak_neutral += 1
                 elif y == "negative":
                     weak_neg += 1
+                elif y == "both":
+                    weak_neg += 1
+                    weak_pos += 1
     return (strong_pos, strong_neg, strong_neutral, weak_pos, weak_neg, weak_neutral)
 
 def main():
