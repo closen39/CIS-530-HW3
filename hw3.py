@@ -38,6 +38,18 @@ def map_entry(entry, top_words):
     return ret
 
 
-
-
+def get_mpqa_features(text, mpqa_dict):
+    neg = 0
+    netural = 0
+    pos = 0
+    for word in word_tokenize(text.lower()):
+        tuples = mpqa_dict[word]
+        for (x,y) in tuples:
+            if y is 'positive':
+                pos += 1
+            elif y is 'neutral':
+                neutral += 1
+            elif y is 'negative':
+                neg += 1
+    return tuple(pos, neg, neutral)
 
