@@ -68,15 +68,16 @@ def get_mpqa_lexicon(lexicon_path):
 
 def get_mpqa_features(text, mpqa_dict):
     neg = 0
-    netural = 0
+    neutral = 0
     pos = 0
     for word in word_tokenize(text.lower()):
         tuples = mpqa_dict[word]
         for (x,y) in tuples:
-            if y is 'positive':
+            print x,y
+            if y == "positive":
                 pos += 1
-            elif y is 'neutral':
+            elif y == "neutral":
                 neutral += 1
-            elif y is 'negative':
+            elif y == "negative":
                 neg += 1
-    return tuple(pos, neg, neutral)
+    return (pos, neg, neutral)
