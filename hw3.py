@@ -40,7 +40,7 @@ def map_entry(entry, top_words):
 def get_mpqa_lexicon(lexicon_path):
     mpqa_dict = dict()
     f = open(lexicon_path)
-    for line in f.readline():
+    for line in f.read():
         # split lines
         li = line.split(' ')
         word = ""
