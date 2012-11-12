@@ -25,4 +25,19 @@ def extract_top_words(csv_file):
             ret.append(word)
     return ret
 
+# returns list of number of times each word appears in entry
+def map_entry(entry, top_words):
+    # initialize list of zeros
+    ret = [0] * len(top_words)
+    wordIndices = dict()
+    for idx, w in enumerate(top_words):
+        wordIndices[w] = idx
+    for word in word_tokenize(entry.lower()):
+        if word in top_words:
+            ret[wordIndices[word]] += 1
+    return ret
+
+
+
+
 
