@@ -70,7 +70,6 @@ def get_mpqa_features(text, mpqa_dict):
     for word in word_tokenize(text.lower()):
         tuples = mpqa_dict[word]
         for (x,y) in tuples:
-            print x,y
             if y == "positive":
                 pos += 1
             elif y == "neutral":
@@ -78,3 +77,35 @@ def get_mpqa_features(text, mpqa_dict):
             elif y == "negative":
                 neg += 1
     return (pos, neg, neutral)
+
+def get_mpqa_features_wordtype(text, mpqa_dict):
+    weak_neg = 0
+    weak_neutral = 0
+    weak_pos = 0
+    strong_neg = 0
+    strong_neutral = 0
+    strong_pos = 0
+    for word in word_tokenize(text.lower()):
+        tuples = mpqa_dict[word]
+        for (x,y) in tuples:
+            if x == 'strongsubj':
+                if y == "positive":
+                    strong_pos += 1
+                elif y == "neutral":
+                    strong_neutral += 1
+                elif y == "negative":
+                    strong_neg += 1
+            elif x == 'weaksubj':
+                if y == "positive":
+                    weak_pos += 1
+                elif y == "neutral":
+                    weak_neutral += 1
+                elif y == "negative":
+                    weak_neg += 1
+    return (strong_pos, strong_neg, strong_neutral, weak_pos, weak_neg, weak_neutral)
+
+def main():
+    pass
+
+if  __name__ =='__main__':
+    main()
