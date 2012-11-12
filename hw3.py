@@ -37,6 +37,32 @@ def map_entry(entry, top_words):
             ret[wordIndices[word]] += 1
     return ret
 
+def get_mpqa_lexicon(lexicon_path):
+    mpqa_dict = dict()
+    f = open(lexicon_path)
+    for line in f.readline():
+        # split lines
+        li = line.split(' ')
+        word = ""
+        ty = ""
+        pol = ""
+        for elt in li:
+            x = elt.split('=')
+            if x[0] == 'word1':
+                word = x[1]
+            elif x[0] == "type":
+                ty = x[1]
+            elif x[0] == "priorpolarity":
+                pol = x[1]
+        # adds a list even if only 1 tuple
+        tup = (ty, pol)
+        tupleList = list()
+        if word in mpqa_dict.keys():
+            tupleList = mpqa_dict[word]
+            tupleList.append(tup)
+        else:
+            tupleList.append(tup)
+            mpqa_dict[word] = tupleList
 
 def get_mpqa_features(text, mpqa_dict):
     neg = 0
@@ -52,4 +78,3 @@ def get_mpqa_features(text, mpqa_dict):
             elif y is 'negative':
                 neg += 1
     return tuple(pos, neg, neutral)
-
