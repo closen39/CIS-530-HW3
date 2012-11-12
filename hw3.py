@@ -63,5 +63,5 @@ def get_mpqa_lexicon(lexicon_path):
         else:
             tupleList.append(tup)
             mpqa_dict[word] = tupleList
-        
+    return mpqa_dict
 
