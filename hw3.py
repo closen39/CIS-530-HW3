@@ -84,6 +84,26 @@ def get_mpqa_features(text, mpqa_dict):
                 neg += 1
     return (pos, neg, neutral)
 
+
+def get_geninq_lexicon(lexicon_path):
+    geninq_dict = dict()
+    f = open(lexicon_path)
+    for line in f:
+        pos, neg, strong, weak = 0, 0, 0, 0
+        x = word_tokenize(line)
+        word = x[0]
+        if 'Pstv' in x:
+            pos = 1
+        if 'Ngtv' in x:
+            neg = 1
+        if 'Strng' in x:
+            strong = 1
+        if 'Weak' in x:
+            weak = 1
+        geninq_dict[word] = [pos, neg, strong, weak]
+    return geninq_dict
+
+
 def get_mpqa_features_wordtype(text, mpqa_dict):
     weak_neg = 0
     weak_neutral = 0
