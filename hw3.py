@@ -81,3 +81,11 @@ def get_mpqa_features(text, mpqa_dict):
             elif y == "negative":
                 neg += 1
     return (pos, neg, neutral)
+
+
+
+def get_geninq_lexicon(lexicon_path):
+    geninq_dict = dict()
+    f = open(lexicon_path)
+    for line in f:
+        
