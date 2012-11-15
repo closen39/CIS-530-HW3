@@ -5,8 +5,7 @@ from csv import DictReader
 from nltk.corpus import PlaintextCorpusReader
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
-from xml.dom import minidom
-from xml.etree import ElementTree
+from BeautifulSoup import BeautifulSoup as Soup
 
 def get_all_files(directory):
     files = PlaintextCorpusReader(directory, '.*')
@@ -174,13 +173,14 @@ def get_geninq_features_strength(text, geninq_dict):
 # section 3.3
 def extract_named_entities(xml_files_path):
     ret = list()
-    parser = ElementTree.XMLParser(encoding="ISO-8859-1")
     files = [xml_files_path + '/' + str(x) for x in get_all_files(xml_files_path)]
 
     for file1 in files:
-        doc = ElementTree.parse(file1, parser=parser)
-        root = doc.getroot()
-        ners = [x.text for x in root.iter("NER")]
+        handler = open(file1).read()
+        doc = Soup(handler)
+        ners = [x for x in doc.findAll("NER")]
+        print ners
+        """
         orgs, persons, locs = 0, 0, 0
         for ner in ners:
             if ner == 'LOCATION':
@@ -190,6 +190,7 @@ def extract_named_entities(xml_files_path):
             elif ner == 'PERSON':
                 persons += 1
         ret.append([orgs, persons, locs])
+        """
     return ret
 
 
