@@ -6,6 +6,10 @@ from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
 from xml.dom import minidom
 
+def get_all_files(directory):
+    files = PlaintextCorpusReader(directory, '.*')
+    return files.fileids()
+
 # extracts the top words having more than 5 occurences
 def extract_top_words(csv_file):
     reader = DictReader(open(csv_file))
@@ -168,7 +172,9 @@ def get_geninq_features_strength(text, geninq_dict):
 # section 3.3
 def extract_named_entities(xml_files_path):
     ret = list()
-    for file1 in xml_files_path:
+    files = [xml_files_path + str(x) for x in get_all_files(xml_files_path)]
+
+    for file1 in files:
         doc = minidom.parse(file1)
         ners = docs.getElementsByTagName("NER")
         orgs, persons, locs = 0, 0, 0
