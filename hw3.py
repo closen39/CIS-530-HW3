@@ -174,10 +174,11 @@ def get_geninq_features_strength(text, geninq_dict):
 # section 3.3
 def extract_named_entities(xml_files_path):
     ret = list()
+    parser = ElementTree.XMLParser(encoding="ISO-8859-1")
     files = [xml_files_path + '/' + str(x) for x in get_all_files(xml_files_path)]
 
     for file1 in files:
-        doc = ElementTree.parse(file1)
+        doc = ElementTree.parse(file1, parser)
         root = doc.getroot()
         ners = [x.text for x in root.iter("NER")]
         orgs, persons, locs = 0, 0, 0
