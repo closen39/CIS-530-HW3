@@ -2,6 +2,7 @@
 # Nate Close (closen@seas.upenn.edu)
 
 from csv import DictReader
+from nltk.corpus import PlaintextCorpusReader
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
 from xml.dom import minidom
