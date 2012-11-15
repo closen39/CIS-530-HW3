@@ -173,7 +173,7 @@ def get_geninq_features_strength(text, geninq_dict):
 # section 3.3
 def extract_named_entities(xml_files_path):
     ret = list()
-    files = [xml_files_path + str(x) for x in get_all_files(xml_files_path)]
+    files = [xml_files_path + '/' + str(x) for x in get_all_files(xml_files_path)]
 
     for file1 in files:
         doc = minidom.parse(file1)
