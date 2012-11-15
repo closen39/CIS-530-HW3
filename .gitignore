@@ -1,1 +1,4 @@
 *.pyc
+xmlTrainingOut/
+xmlTrainingOut2/
+xmlTestingOut/
