@@ -6,6 +6,7 @@ from nltk.corpus import PlaintextCorpusReader
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
 from xml.dom import minidom
+from xml.etree import ElementTree
 
 def get_all_files(directory):
     files = PlaintextCorpusReader(directory, '.*')
@@ -176,8 +177,9 @@ def extract_named_entities(xml_files_path):
     files = [xml_files_path + '/' + str(x) for x in get_all_files(xml_files_path)]
 
     for file1 in files:
-        doc = minidom.parse(file1)
-        ners = docs.getElementsByTagName("NER")
+        doc = ElementTree.parse(file1)
+        root = doc.getroot()
+        ners = [x.text for x in root.iter("NER")]
         orgs, persons, locs = 0, 0, 0
         for ner in ners:
             if ner == 'LOCATION':
