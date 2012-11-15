@@ -178,7 +178,7 @@ def extract_named_entities(xml_files_path):
     files = [xml_files_path + '/' + str(x) for x in get_all_files(xml_files_path)]
 
     for file1 in files:
-        doc = ElementTree.parse(file1, parser)
+        doc = ElementTree.parse(file1, parser=parser)
         root = doc.getroot()
         ners = [x.text for x in root.iter("NER")]
         orgs, persons, locs = 0, 0, 0
