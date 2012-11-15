@@ -4,6 +4,7 @@
 from csv import DictReader
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
+from xml.dom import minidom
 
 # extracts the top words having more than 5 occurences
 def extract_top_words(csv_file):
@@ -163,6 +164,24 @@ def get_geninq_features_strength(text, geninq_dict):
             if data[3] == 1:
                 weak_neg += 1
     return (strong_pos, strong_neg, weak_pos, weak_neg)
+
+# section 3.3
+def extract_named_entities(xml_files_path):
+    ret = list()
+    for file1 in xml_files_path:
+        doc = minidom.parse(file1)
+        ners = docs.getElementsByTagName("NER")
+        orgs, persons, locs = 0, 0, 0
+        for ner in ners:
+            if ner == 'LOCATION':
+                locs += 1
+            elif ner == 'ORGANIZATION':
+                orgs += 1
+            elif ner == 'PERSON':
+                persons += 1
+        ret.append([orgs, persons, locs])
+    return ret
+
 
 def main():
     pass
