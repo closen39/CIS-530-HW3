@@ -179,7 +179,7 @@ def extract_named_entities(xml_files_path):
         handler = open(file1).read()
         doc = Soup(handler)
         ners = [x.string for x in doc.findAll("ner")]
-        print ners
+        #print ners
         orgs, persons, locs = 0, 0, 0
         for ner in ners:
             if ner == 'LOCATION':
