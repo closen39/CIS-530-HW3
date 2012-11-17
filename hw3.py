@@ -210,6 +210,15 @@ def extract_adjectives(xml_files_path):
     
     return ret
 
+def map_adjectives(filename, adj_list):
+    ret = [0] * len(adj_list)
+    f = open(filename)
+    text = f.read().rstrip()
+    for idx, adj in enumerate(adj_list):
+        if adj in text:
+            ret[idx] = 1
+    return ret
+
 def main():
     pass
 
