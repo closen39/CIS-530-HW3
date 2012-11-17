@@ -191,6 +191,23 @@ def extract_named_entities(xml_files_path):
         ret.append([orgs, persons, locs])
     return ret
 
+def extract_adjectives(xml_files_path):
+    counts = FreqDist()
+    files = [xml_files_path + '/' + str(x) for x in get_all_files(xml_files_path)]
+
+    for file1 in files:
+        handler = open(file1).read()
+        doc = Soup(handler)
+        adjs= [x.parent.word.string for x in doc.findAll("pos") if x.string == "JJ"]
+        for adj in adjs:
+            counts.inc(adj)
+
+    ret = list()
+    for word in counts.keys():
+        if counts[word] > 5:
+            ret.append(word)
+    
+    return ret
 
 def main():
     pass
