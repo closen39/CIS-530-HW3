@@ -244,7 +244,7 @@ def process_corpus(data_dir, features):
             features = map_entry(text[1], vec)
             outstring = percentage + " "
             for idx, feature in enumerate(features):
-                outstring += str(idx) + ":" + feature + " "
+                outstring += str(idx) + ":" + str(feature) + " "
 
             out.write(outstring.rstrip() + "\n")
     elif features == 2:
@@ -269,7 +269,7 @@ def process_corpus(data_dir, features):
 
             outstring = percentage + " "
             for idx, feature in enumerate(vec[i]):
-                outstring += str(idx) + ":" + feature + " "
+                outstring += str(idx) + ":" + str(feature) + " "
 
             out.write(outstring.rstrip() + "\n")
             i += 1
@@ -293,7 +293,7 @@ def process_corpus(data_dir, features):
             features = map_adjectives(text[1], vec)
             outstring = percentage + " "
             for idx, feature in enumerate(features):
-                outstring += str(idx) + ":" + feature + " "
+                outstring += str(idx) + ":" + str(feature) + " "
 
             out.write(outstring.rstrip() + "\n")
     elif features == 5:
