@@ -200,7 +200,7 @@ def extract_adjectives(xml_files_path):
         handler = open(file1).read()
         doc = Soup(handler)
         adjs= [x.parent.word.string for x in doc.findAll("pos") if "JJ" in x.string]
-        print adjs
+        # print adjs
         for adj in adjs:
             counts.inc(adj.lower())
 
