@@ -211,10 +211,8 @@ def extract_adjectives(xml_files_path):
     
     return ret
 
-def map_adjectives(filename, adj_list):
+def map_adjectives(text, adj_list):
     ret = [0] * len(adj_list)
-    f = open(filename)
-    text = f.read().rstrip()
     for idx, adj in enumerate(adj_list):
         if adj in text:
             ret[idx] = 1
@@ -246,9 +244,12 @@ def process_corpus(data_dir, features):
             for idx, feature in enumerate(features):
                 outstring += idx + ":" + feature + " "
 
-            out.write(outstring.rstrip())
+            out.write(outstring.rstrip() + "\n")
     elif features == 2:
-        vec = extract_top_words(data_dir + '/all_files')
+        pass
+    elif features == 3:
+        vec = extract_named_entities('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
+        i = 0
         for priceline, textline in pmap, tmap:
             price = priceline.split("\t")
             text = textline.split("\t")
@@ -263,12 +264,37 @@ def process_corpus(data_dir, features):
             else:
                 percentage = "+1"
 
-            features = map_entry(text[1], vec)
+            outstring = percentage + " "
+            for idx, feature in enumerate(vec[i]):
+                outstring += idx + ":" + feature + " "
+
+            out.write(outstring.rstrip() + "\n")
+            i += 1
+    elif features = 4:
+         vec = extract_adjectives('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
+        for priceline, textline in pmap, tmap:
+            price = priceline.split("\t")
+            text = textline.split("\t")
+            if price[0] == 0:
+                continue
+
+            change = price.split(",")[1]
+            if len(change) == 0:
+                percentage = "0"
+            elif change[0] == "-":
+                percentage = "-1"
+            else:
+                percentage = "+1"
+
+            features = map_adjectives(text[1], vec)
             outstring = percentage + " "
             for idx, feature in enumerate(features):
                 outstring += idx + ":" + feature + " "
 
-            out.write(outstring.rstrip())
+            out.write(outstring.rstrip() + "\n")
+    elif features = 5:
+        pass
+
 def main():
     pass
 
