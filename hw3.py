@@ -271,7 +271,7 @@ def process_corpus(data_dir, features):
             out.write(outstring.rstrip() + "\n")
             i += 1
     elif features == 4:
-         vec = extract_adjectives('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
+        vec = extract_adjectives('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
         for priceline, textline in pmap, tmap:
             price = priceline.split("\t")
             text = textline.split("\t")
