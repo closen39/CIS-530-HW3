@@ -225,7 +225,8 @@ def process_corpus(data_dir, features):
     vec = list()
     if features == 1:
         vec = extract_top_words(data_dir + '/all_files')
-        for priceline, textline in pmap, tmap:
+        for priceline in pmap:
+            textline = tmap.next().strip()
             price = priceline.split("\t")
             text = textline.split("\t")
             if price[0] == 0:
@@ -250,7 +251,8 @@ def process_corpus(data_dir, features):
     elif features == 3:
         vec = extract_named_entities('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
         i = 0
-        for priceline, textline in pmap, tmap:
+        for priceline in pmap:
+            textline = tmap.next().strip()
             price = priceline.split("\t")
             text = textline.split("\t")
             if price[0] == 0:
@@ -272,7 +274,8 @@ def process_corpus(data_dir, features):
             i += 1
     elif features == 4:
         vec = extract_adjectives('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
-        for priceline, textline in pmap, tmap:
+        for priceline in pmap:
+            textline = tmap.next().strip()
             price = priceline.split("\t")
             text = textline.split("\t")
             if price[0] == 0:
