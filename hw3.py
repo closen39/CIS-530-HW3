@@ -233,7 +233,7 @@ def process_corpus(data_dir, features):
             if price[0] == 0:
                 continue
 
-            change = price.split(",")[1]
+            change = price[1].split(",")[1]
             if len(change) == 0:
                 percentage = "0"
             elif change[0] == "-":
@@ -259,7 +259,7 @@ def process_corpus(data_dir, features):
             if price[0] == 0:
                 continue
 
-            change = price.split(",")[1]
+            change = price[1].split(",")[1]
             if len(change) == 0:
                 percentage = "0"
             elif change[0] == "-":
@@ -282,7 +282,7 @@ def process_corpus(data_dir, features):
             if price[0] == 0:
                 continue
 
-            change = price.split(",")[1]
+            change = price[1].split(",")[1]
             if len(change) == 0:
                 percentage = "0"
             elif change[0] == "-":
