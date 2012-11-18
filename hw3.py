@@ -230,7 +230,7 @@ def process_corpus(data_dir, features):
             textline = tmap.next().strip()
             price = priceline.split("\t")
             text = textline.split("\t")
-            if price[0] == 0:
+            if price[0] == 0 or len(text) == 1:
                 continue
 
             change = price[1].split(",")[1]
@@ -256,7 +256,7 @@ def process_corpus(data_dir, features):
             textline = tmap.next().strip()
             price = priceline.split("\t")
             text = textline.split("\t")
-            if price[0] == 0:
+            if price[0] == 0 or len(text) == 1:
                 continue
 
             change = price[1].split(",")[1]
@@ -279,7 +279,7 @@ def process_corpus(data_dir, features):
             textline = tmap.next().strip()
             price = priceline.split("\t")
             text = textline.split("\t")
-            if price[0] == 0:
+            if price[0] == 0 or len(text) == 1:
                 continue
 
             change = price[1].split(",")[1]
