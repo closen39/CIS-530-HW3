@@ -12,11 +12,12 @@ def get_all_files(directory):
     return files.fileids()
 
 # extracts the top words having more than 5 occurences
-def extract_top_words(csv_file):
-    reader = DictReader(open(csv_file))
+def extract_top_words(directory):
+    #reader = DictReader(open(csv_file))
+    files = [directory + '/' + str(x) for x in get_all_files(directory)]
     corpus = list()
-    for item in reader:
-        corpus.append(item['situation'])
+    for file1 in files:
+        corpus.append(file1.read().rstrip())
 
     # get list of words
     fdist = FreqDist()
