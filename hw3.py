@@ -17,7 +17,8 @@ def extract_top_words(directory):
     files = [directory + '/' + str(x) for x in get_all_files(directory)]
     corpus = list()
     for file1 in files:
-        corpus.append(file1.read().rstrip())
+        f1 = open(file1)
+        corpus.append(f1.read().rstrip())
 
     # get list of words
     fdist = FreqDist()
