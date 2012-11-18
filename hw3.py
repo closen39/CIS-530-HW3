@@ -199,7 +199,7 @@ def extract_adjectives(xml_files_path):
     for file1 in files:
         handler = open(file1).read()
         doc = Soup(handler)
-        adjs= [x.parent.word.string for x in doc.findAll("pos") if x.string == "JJ"]
+        adjs= [x.parent.word.string for x in doc.findAll("pos") if "JJ" in x.string]
         print adjs
         for adj in adjs:
             counts.inc(adj.lower())
@@ -220,6 +220,55 @@ def map_adjectives(filename, adj_list):
             ret[idx] = 1
     return ret
 
+def process_corpus(data_dir, features):
+    out = open("svm_data", "w")
+    pmap = open (data_dir + '/price_mapping.out')
+    tmap = open (data_dir + '/text_mapping.out')
+    vec = list()
+    if features == 1:
+        vec = extract_top_words(data_dir + '/all_files')
+        for priceline, textline in pmap, tmap:
+            price = priceline.split("\t")
+            text = textline.split("\t")
+            if price[0] == 0:
+                continue
+
+            change = price.split(",")[1]
+            if len(change) == 0:
+                percentage = "0"
+            elif change[0] == "-":
+                percentage = "-1"
+            else:
+                percentage = "+1"
+
+            features = map_entry(text[1], vec)
+            outstring = percentage + " "
+            for idx, feature in enumerate(features):
+                outstring += idx + ":" + feature + " "
+
+            out.write(outstring.rstrip())
+    elif features == 2:
+        vec = extract_top_words(data_dir + '/all_files')
+        for priceline, textline in pmap, tmap:
+            price = priceline.split("\t")
+            text = textline.split("\t")
+            if price[0] == 0:
+                continue
+
+            change = price.split(",")[1]
+            if len(change) == 0:
+                percentage = "0"
+            elif change[0] == "-":
+                percentage = "-1"
+            else:
+                percentage = "+1"
+
+            features = map_entry(text[1], vec)
+            outstring = percentage + " "
+            for idx, feature in enumerate(features):
+                outstring += idx + ":" + feature + " "
+
+            out.write(outstring.rstrip())
 def main():
     pass
 
