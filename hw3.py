@@ -79,7 +79,10 @@ def get_mpqa_features(text, mpqa_dict):
     neutral = 0
     pos = 0
     for word in word_tokenize(text.lower()):
-        tuples = mpqa_dict[word]
+        try:
+            tuples = mpqa_dict[word]
+        except:
+            tuples = list()
         for (x,y) in tuples:
             if y == "positive":
                 pos += 1
@@ -149,7 +152,10 @@ def get_geninq_features(text, geninq_dict):
     pos = 0
     neg = 0
     for word in word_tokenize(text.lower()):
-        data = geninq_dict[word]
+        try:
+            data = geninq_dict[word]
+        except:
+            data = [0,0]
         if data[0] == 1:
             pos += 1
         if data[1] == 1:
@@ -162,7 +168,10 @@ def get_geninq_features_strength(text, geninq_dict):
     weak_pos = 0
     weak_neg = 0  
     for word in word_tokenize(text.lower()):
-        data = geninq_dict[word]
+         try:
+            data = geninq_dict[word]
+        except:
+            data = [0,0,0,0]
         if data[0] == 1:
             if data[2] == 1:
                 strong_pos += 1
