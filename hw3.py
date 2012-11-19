@@ -1,6 +1,16 @@
 # Jason Mow (jmow@seas.upenn.edu)
 # Nate Close (closen@seas.upenn.edu)
 
+"""
+GENERAL COMMENTS:
+We were unable to complete section 5.4 because the files we are supposed
+to generate are too big to hold on our eniac disk space. As such, we cannot
+submit a scores_adv.txt file with these results. Similarly, we were unable to 
+generate the testing files which will be used to calculate the set
+performance. We were able to scale the data for named_entities 
+which is included in our submission. 
+"""
+
 from csv import DictReader
 from nltk.corpus import PlaintextCorpusReader
 from nltk.tokenize import word_tokenize
