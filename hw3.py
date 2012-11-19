@@ -168,7 +168,7 @@ def get_geninq_features_strength(text, geninq_dict):
     weak_pos = 0
     weak_neg = 0  
     for word in word_tokenize(text.lower()):
-         try:
+        try:
             data = geninq_dict[word]
         except:
             data = [0,0,0,0]
