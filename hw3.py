@@ -266,14 +266,15 @@ def process_corpus(data_dir, features):
             else:
                 percentage = "+1"
 
-            mpqa_feat = get_mpqa_features_wordtype(entry, mpqa)
-            geninq_feat = get_geninq_features_strength(entry, geninq)
+            mpqa_feat = get_mpqa_features_wordtype(text[1], mpqa)
+            geninq_feat = get_geninq_features_strength(text[1], geninq)
             outstring = percentage + " "
             for feat in mpqa_feat:
-                outstring += i + ":" + str(feat) + " "
+                outstring += str(i) + ":" + str(feat) + " "
                 i += 1
             for feat in geninq_feat:
-                outstring += i + ":" + str(feat) + " "
+                outstring += str(i) + ":" + str(feat) + " "
+                i += 1
             out.write(outstring.rstrip() + "\n")
     elif features == 3:
         vec = extract_named_entities('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
@@ -323,7 +324,54 @@ def process_corpus(data_dir, features):
 
             out.write(outstring.rstrip() + "\n")
     elif features == 5:
-        pass
+        top_words = extract_top_words(data_dir + '/all_files')
+        mpqa = get_mpqa_lexicon('/project/cis/nlp/data/corpora/mpqa-lexicon/subjclueslen1-HLTEMNLP05.tff')
+        geninq = get_geninq_lexicon('/project/cis/nlp/data/corpora/inquirerTags.txt')
+        entities = extract_named_entities('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
+        entityCount = 0
+        adjs = extract_adjectives('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
+        i = 0
+
+        for priceline in pmap:
+            textline = tmap.next().strip()
+            price = priceline.split("\t")
+            text = textline.split("\t")
+            if price[0] == 0 or len(text) == 1:
+                continue
+
+            change = price[1].split(",")[1]
+            if len(change) == 0:
+                percentage = "0"
+            elif change[0] == "-":
+                percentage = "-1"
+            else:
+                percentage = "+1"
+
+            outstring = percentage + " "
+
+            lexical_feat = map_entry(text[1], vec)
+            for feat in lexical_feat:
+                outstring += str(i) + ":" + str(feat) + " "
+                i += 1
+
+            mpqa_feat = get_mpqa_features_wordtype(text[1], mpqa)
+            geninq_feat = get_geninq_features_strength(text[1], geninq)
+            for feat in mpqa_feat:
+                outstring += str(i) + ":" + str(feat) + " "
+                i += 1
+            for feat in geninq_feat:
+                outstring += str(i) + ":" + str(feat) + " "
+                i += 1
+            for feat in entities[entityCount]:
+                outstring += str(i) + ":" + str(feat) + " "
+                i += 1
+
+            adj_feat = map_adjectives(text[1], adjs)
+            for feat in adj_feat:
+                outstring += str(i) + ":" + str(feat) + " "
+            
+            out.write(outstring.rstrip() + "\n")
+            entityCount += 1
 
 def main():
     pass
