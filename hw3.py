@@ -256,13 +256,13 @@ def process_corpus(data_dir, features):
             features = map_entry(text[1], vec)
             outstring = percentage + " "
             for idx, feature in enumerate(features):
-                outstring += str(idx) + ":" + str(feature) + " "
+                outstring += str(idx+1) + ":" + str(feature) + " "
 
             out.write(outstring.rstrip() + "\n")
     elif features == 2:
         mpqa = get_mpqa_lexicon('/project/cis/nlp/data/corpora/mpqa-lexicon/subjclueslen1-HLTEMNLP05.tff')
         geninq = get_geninq_lexicon('/project/cis/nlp/data/corpora/inquirerTags.txt')
-        i = 0
+        i = 1
         for priceline in pmap:
             textline = tmap.next().strip()
             price = priceline.split("\t")
@@ -308,7 +308,7 @@ def process_corpus(data_dir, features):
 
             outstring = percentage + " "
             for idx, feature in enumerate(vec[i]):
-                outstring += str(idx) + ":" + str(feature) + " "
+                outstring += str(idx+1) + ":" + str(feature) + " "
 
             out.write(outstring.rstrip() + "\n")
             i += 1
@@ -332,7 +332,7 @@ def process_corpus(data_dir, features):
             features = map_adjectives(text[1], vec)
             outstring = percentage + " "
             for idx, feature in enumerate(features):
-                outstring += str(idx) + ":" + str(feature) + " "
+                outstring += str(idx+1) + ":" + str(feature) + " "
 
             out.write(outstring.rstrip() + "\n")
     elif features == 5:
@@ -342,7 +342,7 @@ def process_corpus(data_dir, features):
         entities = extract_named_entities('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
         entityCount = 0
         adjs = extract_adjectives('/home1/j/jmow/school/cis530/hw3/xmlTrainingOut')
-        i = 0
+        i = 1
 
         for priceline in pmap:
             textline = tmap.next().strip()
