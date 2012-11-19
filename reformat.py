@@ -1,8 +1,14 @@
 def reformat():
-    f = open("fileList2")
-    out = open("fileList2Out", "w")
+    f = open("named_entities.txt")
+    out = open("named_entities_fixed.txt", "w")
     for line in f:
-        out.write('/home1/c/cis530/hw3/data/testing/all_files/' + line.rstrip() + "\n")
+        new_line = ""
+        for idx, let in enumerate(line):
+            if idx < len(line) - 1 and line[idx + 1] == ":":
+                new_line += str(int(line[idx]) + 1)
+            else:
+                new_line += str(line[idx])
+        out.write(new_line)
     out.close()
 
 def main():
