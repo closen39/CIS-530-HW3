@@ -374,7 +374,11 @@ def process_corpus(data_dir, features):
             entityCount += 1
 
 def main():
-    pass
+    # process_corpus('/home1/c/cis530/hw3/data/training', 1)
+    process_corpus('/home1/c/cis530/hw3/data/training', 2)
+    # process_corpus('/home1/c/cis530/hw3/data/training', 3)
+    process_corpus('/home1/c/cis530/hw3/data/training', 4)
+    process_corpus('/home1/c/cis530/hw3/data/training', 5)
 
 if  __name__ =='__main__':
     main()
