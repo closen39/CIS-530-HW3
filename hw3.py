@@ -100,7 +100,10 @@ def get_mpqa_features_wordtype(text, mpqa_dict):
     strong_neutral = 0
     strong_pos = 0
     for word in word_tokenize(text.lower()):
-        tuples = mpqa_dict[word]
+        try:
+            tuples = mpqa_dict[word]
+        except:
+            tuples = list()
         for (x,y) in tuples:
             if x == 'strongsubj':
                 if y == "positive":
