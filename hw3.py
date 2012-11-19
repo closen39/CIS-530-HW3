@@ -220,7 +220,7 @@ def map_adjectives(text, adj_list):
     return ret
 
 def process_corpus(data_dir, features):
-    out = open("svm_data", "w")
+    out = open("svm_data" + str(features), "w")
     pmap = open (data_dir + '/price_mapping.out')
     tmap = open (data_dir + '/text_mapping.out')
     vec = list()
@@ -369,7 +369,7 @@ def process_corpus(data_dir, features):
             adj_feat = map_adjectives(text[1], adjs)
             for feat in adj_feat:
                 outstring += str(i) + ":" + str(feat) + " "
-            
+
             out.write(outstring.rstrip() + "\n")
             entityCount += 1
 
